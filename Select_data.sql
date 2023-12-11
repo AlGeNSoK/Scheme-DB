@@ -4,9 +4,9 @@ SELECT name, duration FROM Track
  ORDER BY duration DESC 
  LIMIT 1;
 
---Вывод списка треков с продолжительностью более 3,5 минут
+--Вывод списка треков с продолжительностью не менее 3,5 минут
 SELECT name FROM Track 
- WHERE duration > 210;
+ WHERE duration >= 210;
  
 --Вывод списка сборников, вышедших с 2018 по 2020 год включительно
 SELECT name FROM Collection 
@@ -18,7 +18,23 @@ SELECT name FROM Artist
  
 --Названия треков, которые содержат слово "мой" или "my"
 SELECT name FROM Track 
- WHERE name LIKE '%My%' OR name LIKE '%мой%';
+ WHERE name ILIKE 'my %' 
+ 	OR name ILIKE '% my %'
+ 	OR name ILIKE '% my'
+ 	OR name ILIKE 'my'
+ 	OR name ILIKE 'мой %'
+ 	OR name ILIKE '% мой %'
+ 	OR name ILIKE '% мой'
+	OR name ILIKE 'мой';
+
+--Дополнительный способ реализации через массивы
+SELECT name FROM Track 
+ WHERE STRING_TO_ARRAY(LOWER(name), ' ') && ARRAY['my', 'мой'];
+
+--Дополнительный способ реализации через регулярные выражения
+SELECT name FROM Track 
+ WHERE LOWER(name) ~* '\mmy\M|\mмой\M';
+
  
 --Задание 3
 --Количество исполнителей в каждом жанре
@@ -56,13 +72,13 @@ WHERE Artist.name = 'Lady Gaga'
 GROUP BY c.name;
 
 --Задание 4
---Названия албомов, в которых присутствуют исполнители более чем одного жанра
+--Названия альбомов, в которых присутствуют исполнители более чем одного жанра
 SELECT al.name FROM Album al
 JOIN ArtistAlbum aa ON al.id = aa.album_id 
 JOIN Artist a ON aa.artist_id = a.id 
 JOIN ArtistGenre ag ON a.id = ag.artist_id 
-GROUP BY al.name 
-HAVING COUNT(DISTINCT ag.genre_id) > 1;
+GROUP BY al.name
+HAVING COUNT(DISTINCT ag.genre_id) > 1 AND COUNT(DISTINCT a.id) > 1;
 
 
 --Наименование треков, которые не входят в сборники

@@ -25,7 +25,7 @@ INSERT INTO Album(name, year_of_release)
 			('Bridges to Babylon', '2018-09-29'),
 			('Evanescence', '2017-07-10'),
 			('Synthesis', '2019-11-10'),
-			('The Bitter Truth', '2021-03-26')
+			('The Bitter Truth', '2021-03-26'),
 			('The Fame', '2018-08-19'),
 			('The Fame Monster', '2019-11-18');
 		
@@ -115,7 +115,7 @@ INSERT INTO Track(name, duration, album_id)
 			('Paparazzi', '208', '13'),
 			('Poker Face', '237', '13'),
 			('Bad Romance', '295', '14'),
-			('Alejandro', '274', '14')
+			('Alejandro', '274', '14'),
 			('Beautiful, Dirty, Rich', '172', '13'),
 			('Brown Eyes', '243', '13'),
 			('Dance in the Dark', '289', '14'),
@@ -227,3 +227,26 @@ INSERT INTO CollectionTrack
 			(1, 75),
 			(6, 76),
 			(1, 77);
+		
+INSERT INTO Track(name, duration, album_id)
+	VALUES 	('my own', '194', '1'),
+			('own my', '226', '1'),
+			('my', '245', '1'),
+			('oh my god', '229', '1'),
+			('myself', '153', '1'),
+			('by myself', '197', '1'),
+			('bemy self', '195', '1'),
+			('myself by', '207', '1'),
+			('by myself by', '185', '1'),
+			('beemy', '230', '1'),
+			('premyne', '236', '1');
+			
+INSERT INTO Track(name, duration, album_id)
+	VALUES 	('мой', '194', '1'),
+			('мойка', '226', '1');
+			
+INSERT INTO ArtistGenre
+	VALUES 	(5, 2);
+
+INSERT INTO ArtistGenre
+	VALUES 	(7, 2);
